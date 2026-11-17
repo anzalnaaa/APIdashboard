@@ -57,7 +57,9 @@ function render() {
   $("#count").text("Showing " + list.length + " of " + students.length + " students");
 }
 
-function onLoaded() { fillDepartments(); render(); }
+function stamp() { $("#updated").text("Updated " + new Date().toLocaleTimeString()); }
+
+function onLoaded() { fillDepartments(); render(); stamp(); }
 
 /* Request 1: Fetch API */
 function loadStudents() {
@@ -97,6 +99,7 @@ $(function () {
   loadStudents();
   loadStats();
   $("#retry").on("click", loadStudents);
+  $("#refresh").on("click", function () { loadStudents(); loadStats(); });
   $("#search, #dept").on("input change", function () { page = 1; render(); });
   $("#pager").on("click", "button", function () { page = $(this).data("page"); render(); });
 });
