@@ -1,5 +1,7 @@
 "use strict";
+const PAGE_SIZE = 5;
 let students = [];
+let page = 1;
 
 function setState(state) {
   $("#loading").toggleClass("d-none", state !== "loading");
@@ -19,15 +21,43 @@ function renderRows(list) {
   });
 }
 
-function visible() { return students; }
+function visible() {
+  const q = $("#search").val().trim().toLowerCase();
+  const dept = $("#dept").val();
+  return students.filter(function (s) {
+    return (!dept || s.department === dept) &&
+      (!q || (s.name + " " + s.email).toLowerCase().includes(q));
+  });
+}
+
+function renderPager(pages) {
+  const ul = $("#pager").empty();
+  for (let p = 1; p <= pages; p++) {
+    const btn = $("<button>").addClass("page-link").attr("type", "button").text(p).data("page", p);
+    ul.append($("<li>").addClass("page-item" + (p === page ? " active" : "")).append(btn));
+  }
+}
+
+function fillDepartments() {
+  const sel = $("#dept");
+  const keep = sel.val();
+  sel.find("option:not(:first)").remove();
+  Array.from(new Set(students.map(function (s) { return s.department; }))).sort()
+    .forEach(function (d) { sel.append($("<option>").val(d).text(d)); });
+  sel.val(keep);
+}
 
 function render() {
   const list = visible();
+  const pages = Math.max(1, Math.ceil(list.length / PAGE_SIZE));
+  page = Math.min(page, pages);
   setState(list.length ? "data" : "empty");
-  renderRows(list);
+  renderRows(list.slice((page - 1) * PAGE_SIZE, page * PAGE_SIZE));
+  renderPager(pages);
+  $("#count").text("Showing " + list.length + " of " + students.length + " students");
 }
 
-function onLoaded() { render(); }
+function onLoaded() { fillDepartments(); render(); }
 
 /* Request 1: Fetch API */
 function loadStudents() {
@@ -67,4 +97,6 @@ $(function () {
   loadStudents();
   loadStats();
   $("#retry").on("click", loadStudents);
+  $("#search, #dept").on("input change", function () { page = 1; render(); });
+  $("#pager").on("click", "button", function () { page = $(this).data("page"); render(); });
 });
