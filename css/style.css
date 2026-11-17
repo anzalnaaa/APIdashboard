@@ -1,0 +1,7 @@
+body { background: #f4f6f9; }
+.navbar { background: #0f766e !important; }
+.kpi .value { font-size: 2rem; font-weight: 600; line-height: 1.1; }
+.table th { white-space: nowrap; }
+.page-item.active .page-link { background: #0f766e; border-color: #0f766e; }
+.btn-primary { background: #0f766e; border-color: #0f766e; }
+.btn-primary:hover { background: #0b5d57; border-color: #0b5d57; }

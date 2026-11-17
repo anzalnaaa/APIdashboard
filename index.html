@@ -1,0 +1,62 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>API Dashboard</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <nav class="navbar navbar-dark">
+    <div class="container">
+      <span class="navbar-brand mb-0 h1">API Dashboard</span>
+      <span class="navbar-text small" id="updated">Not loaded yet</span>
+    </div>
+  </nav>
+
+  <main class="container py-4">
+    <div class="alert alert-warning d-none" id="stats-error" role="alert"></div>
+    <section class="row g-3 mb-4" aria-label="Summary">
+      <div class="col-6 col-lg-3"><div class="card kpi h-100"><div class="card-body"><div class="text-secondary small">Students</div><div class="value" id="s-total">-</div></div></div></div>
+      <div class="col-6 col-lg-3"><div class="card kpi h-100"><div class="card-body"><div class="text-secondary small">Departments</div><div class="value" id="s-depts">-</div></div></div></div>
+      <div class="col-6 col-lg-3"><div class="card kpi h-100"><div class="card-body"><div class="text-secondary small">Average semester</div><div class="value" id="s-sem">-</div></div></div></div>
+      <div class="col-6 col-lg-3"><div class="card kpi h-100"><div class="card-body"><div class="text-secondary small">Active courses</div><div class="value" id="s-courses">-</div></div></div></div>
+    </section>
+
+    <section class="card">
+      <div class="card-body">
+        <div class="row g-2 mb-3">
+          <div class="col-12 col-md-5"><label class="visually-hidden" for="search">Search students</label><input class="form-control" id="search" type="search" placeholder="Search by name or email"></div>
+          <div class="col-8 col-md-4"><label class="visually-hidden" for="dept">Department</label><select class="form-select" id="dept"><option value="">All departments</option></select></div>
+          <div class="col-4 col-md-3 d-grid"><button class="btn btn-primary" id="refresh" type="button">Refresh</button></div>
+        </div>
+
+        <div id="loading" class="text-center py-5 d-none" role="status"><div class="spinner-border text-secondary"></div><div class="mt-2 text-secondary">Loading students...</div></div>
+        <div id="error" class="alert alert-danger d-none" role="alert">
+          <strong>Could not load students.</strong> <span id="error-msg"></span>
+          Check that the page is opened through localhost and that data/sample.json exists.
+          <button class="btn btn-sm btn-outline-danger ms-2" id="retry" type="button">Try again</button>
+        </div>
+        <div id="empty" class="text-center text-secondary py-5 d-none">No students match your search. Clear the search or choose another department.</div>
+
+        <div id="table-wrap" class="d-none">
+          <div class="table-responsive">
+            <table class="table table-hover align-middle">
+              <thead><tr><th>ID</th><th>Name</th><th>Email</th><th>Department</th><th>Semester</th></tr></thead>
+              <tbody id="rows"></tbody>
+            </table>
+          </div>
+          <div class="d-flex flex-wrap justify-content-between align-items-center gap-2">
+            <span class="text-secondary small" id="count"></span>
+            <nav aria-label="Student pages"><ul class="pagination pagination-sm mb-0" id="pager"></ul></nav>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>
