@@ -1,0 +1,17 @@
+{
+  "source": "Local sample data for Lab 8",
+  "students": [
+    { "id": 1, "name": "Ayesha Khan", "email": "ayesha.khan@example.com", "department": "Software Engineering", "semester": 4 },
+    { "id": 2, "name": "Hamza Ali", "email": "hamza.ali@example.com", "department": "Information Technology", "semester": 2 },
+    { "id": 3, "name": "Sara Memon", "email": "sara.memon@example.com", "department": "Data Science", "semester": 6 },
+    { "id": 4, "name": "Bilal Ahmed", "email": "bilal.ahmed@example.com", "department": "Computer Science", "semester": 3 },
+    { "id": 5, "name": "Fatima Shaikh", "email": "fatima.shaikh@example.com", "department": "Software Engineering", "semester": 4 },
+    { "id": 6, "name": "Usman Raza", "email": "usman.raza@example.com", "department": "Software Engineering", "semester": 5 },
+    { "id": 7, "name": "Mariam Soomro", "email": "mariam.soomro@example.com", "department": "Data Science", "semester": 2 },
+    { "id": 8, "name": "Zain Abbas", "email": "zain.abbas@example.com", "department": "Information Technology", "semester": 6 },
+    { "id": 9, "name": "Hira Baloch", "email": "hira.baloch@example.com", "department": "Computer Science", "semester": 1 },
+    { "id": 10, "name": "Danish Qureshi", "email": "danish.qureshi@example.com", "department": "Software Engineering", "semester": 3 },
+    { "id": 11, "name": "Noor Fatima", "email": "noor.fatima@example.com", "department": "Data Science", "semester": 4 },
+    { "id": 12, "name": "Imran Jatoi", "email": "imran.jatoi@example.com", "department": "Information Technology", "semester": 5 }
+  ]
+}
