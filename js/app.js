@@ -47,7 +47,24 @@ function loadStudents() {
     });
 }
 
+/* Request 2: jQuery AJAX */
+function loadStats() {
+  $("#stats-error").addClass("d-none");
+  return $.ajax({ url: "data/stats.json", dataType: "json", cache: false })
+    .done(function (stats) {
+      $("#s-total").text(stats.totalStudents);
+      $("#s-depts").text(stats.departments);
+      $("#s-sem").text(stats.averageSemester);
+      $("#s-courses").text(stats.activeCourses);
+    })
+    .fail(function (xhr, status) {
+      $("#stats-error").removeClass("d-none")
+        .text("Could not load summary numbers (" + status + "). Check data/stats.json.");
+    });
+}
+
 $(function () {
   loadStudents();
+  loadStats();
   $("#retry").on("click", loadStudents);
 });
